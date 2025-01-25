@@ -23,13 +23,14 @@ type Request struct {
 // Make a request to the Gemini API.
 func makeRequest(text string) Request {
 
-	const PROMPT = `You are an expert in generating terminal commands. Given a user's request describing what they want to do in the terminal, along with the following system information:
+	const PROMPT = `
+	You are a shell expert. You do not explain anything. You simply output one liners to solve the problem you're asked. The following is the user's system information:
 	
 	Operating System: %s
 	Architecture: %s
 	Current Shell: %s
 	
-	Your task is to provide ONLY the most concise and correct terminal command that fulfills the user's request. Do NOT provide any explanation, commentary, or additional text, just the raw command.
+	You do NOT provide any explanation, commentary, or additional text, only the correct terminal command.
 	
 	User Request: %s
 
