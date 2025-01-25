@@ -1,14 +1,17 @@
 package gemini
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
+	"github.com/abtsousa/hook/safe_error"
 	"io"
 	"net/http"
 	"os"
 	"runtime"
 )
 
+// Standard JSON output for Gemini requests.
 type Request struct {
 	Contents []struct {
 		Parts []struct {
@@ -17,6 +20,7 @@ type Request struct {
 	} `json:"contents"`
 }
 
+// Make a request to the Gemini API.
 func makeRequest(text string) Request {
 
 	const PROMPT = `You are an expert in generating terminal commands. Given a user's request describing what they want to do in the terminal, along with the following system information:
@@ -53,27 +57,34 @@ func makeRequest(text string) Request {
 	}
 }
 
-func (c *Client) Query(url string) (string, error) {
+// Queries Gemini and outputs its response as a string.
+func (c *Client) Query(query string) (string, error) {
 
-	req, err := http.NewRequest("GET", url, nil)
+	url := BASE_URL + API_KEY
+	payload, err := json.Marshal(makeRequest(query))
 	if err != nil {
-		return "", fmt.Errorf("couldn't make request: %v", err)
+		return "", safe_error.Return("Error marshalling request: %v", err)
+	}
+
+	req, err := http.NewRequest("POST", url, bytes.NewBuffer(payload))
+	if err != nil {
+		return "", safe_error.Return("couldn't make request: %v", err)
 	}
 
 	rsp, err := c.client.Do(req)
 	if err != nil {
-		return "", fmt.Errorf("couldn't get response: %v", err)
+		return "", safe_error.Return("couldn't get response: %v", err)
 	}
 
 	dat, err := io.ReadAll(rsp.Body)
 	if err != nil {
-		return "", fmt.Errorf("couldn't parse received data: %v", err)
+		return "", safe_error.Return("couldn't parse received data: %v", err)
 	}
 
 	var t Response
 	err = json.Unmarshal(dat, &t)
 	if err != nil {
-		return "", fmt.Errorf("couldn't unmarshal received data: %v", err)
+		return "", safe_error.Return("couldn't unmarshal received data: %v", err)
 	}
 
 	return t.Candidates[0].Content.Parts[0].Text, nil
