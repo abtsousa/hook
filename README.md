@@ -6,7 +6,7 @@ Hook is a lightning-fast CLI tool that uses AI to generate shell commands based 
 
 Written 100% in Go. Should work in Linux, macOS and Windows!
 
-⚠️ AI makes mistakes. Double-check the generated commands before executing them. ⚠️
+**⚠️ AI makes mistakes. Please double-check the generated commands before executing them. ⚠️**
 
 ## Prerequisites
 
@@ -64,7 +64,7 @@ Now just type `? description` and the shell prompt will be auto-filled with the 
 
 ## Acknowledgements
 
-Inspired by [Warp terminal](https://www.warp.dev/download)'s AI prompt.
+Inspired by [Warp terminal](https://www.warp.dev/)'s AI prompt.
 
 ## License
 
