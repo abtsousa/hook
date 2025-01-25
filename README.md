@@ -41,7 +41,7 @@ sudo mv ./hook /usr/local/bin
 ./hook "describe what you want to do"
 ```
 
-The program prints the command that should be typed in the console.
+The program outputs the command that should be typed in the console.
 
 ## Zsh Configuration
 
@@ -50,7 +50,7 @@ Add to your `.zshrc`:
 function __hook() {print -z $(hook ${@:2})}
 alias '?'=__hook
 ```
-Now just type `? description` and your shell input should be replaced with the suggested command. No more copy-pasting!
+Now just type `? description` and the suggested command will be automatically redirected into your shell input. No more copy-pasting!
 
 ## TODO
 
