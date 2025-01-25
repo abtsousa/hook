@@ -2,7 +2,7 @@
 
 ## Overview
 
-Hook is a simple, lightning-fast CLI tool that uses the Gemini API to generate shell commands based on a user query.
+Hook is a lightning-fast CLI tool that uses AI to generate shell commands based on a user query. Simply write what you want to do in the terminal, and let AI do the work!
 
 Written 100% in Go. Should work in Linux, macOS and Windows!
 
