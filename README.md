@@ -50,16 +50,21 @@ Add to your `.zshrc`:
 function __hook() {print -z $(hook ${@:2})}
 alias '?'=__hook
 ```
-Now just type `? description` and the suggested command will be automatically redirected into your shell input. No more copy-pasting!
+Now just type `? description` and the shell prompt will be auto-filled with the suggested command. No more copy-pasting!
 
 ## TODO
 
 - Pre-built binaries
+- Easier setup and configuration (setup script)
 - Proper config file support, better (OS-agnostic) API key handling
 - Windows command shell and Powershell testing
 - Easier ZSH configuration on install and other shell support
 - Local (offline) LLM support
 - OpenAI, Claude support, more?
+
+## Acknowledgements
+
+Inspired by [Warp terminal](https://www.warp.dev/download)'s AI prompt.
 
 ## License
 
